@@ -30,18 +30,6 @@ for($myI=$start;$myI<$start+50;$myI++){
 	}
 }
 
-/*$albumCursor = $album_Coll->find();
-foreach ($albumCursor as $albumLine) {
-	if(count($albumLine["album_Genres"])>0){
-		$album_Genres = array();
-		for($i=0;$i<count($albumLine["album_Genres"]); $i++){
-			$album_Genres[$i]=$albumLine["album_Genres"][$i]["id"];
-		}
-	    getFans($albumLine["album_Id"], $album_Genres);
-	}
-}*/
-
-
 function getFans($id, $album_Genres){
 	$content = file_get_contents('http://api.deezer.com/album/'.$id.'/fans');
 	$myFans=json_decode($content);

@@ -4,7 +4,7 @@ $mongo = new MongoClient();
 echo('<head><meta charset="UTF-8"></head><body>');
 
 $db = $mongo->selectDB("deezer");
-$album_Coll = $db->selectCollection("albums");		//Should start at 69000
+$album_Coll = $db->selectCollection("albums");
 
 if(isset($_GET['album'])){
 	$start=$_GET['album'];
@@ -20,7 +20,7 @@ for($i=$start; $i<$start+100; $i++){
 	addAlbum($i, $album_Coll);
 }
 
-function addAlbum($i, $album_Coll){
+function addAlbum($i, $album_Coll){					//Add album to db
 	$content = file_get_contents('http://api.deezer.com/album/'.$i);
 	$myAlbum=json_decode($content);
 	if(!isset($myAlbum->error)){
@@ -31,5 +31,5 @@ function addAlbum($i, $album_Coll){
 $newStart=$start+100;
 
 echo($start.' to '.$newStart);
-echo('<script> setTimeout(function(){window.location.href="http://localhost/recupAlbums.php?album='.$newStart.'";}, 1000);</script>');
+echo('<script> setTimeout(function(){window.location.href="http://localhost/recupAlbums.php?album='.$newStart.'";}, 1000);</script>');		//Script for infinite loop
 ?>
